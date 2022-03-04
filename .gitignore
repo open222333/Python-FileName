@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*test*.*
+config.ini
 
 # C extensions
 *.so
@@ -72,7 +74,7 @@ instance/
 docs/_build/
 
 # PyBuilder
-target/
+# target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
