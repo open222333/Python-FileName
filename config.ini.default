@@ -1,0 +1,59 @@
+[FILE]
+; 預設 target
+; TARGET_DIR=
+
+; 是否為測試 預設 關
+; IS_TEST=True
+
+; 映射目標資料夾內的子資料夾 預設 關
+; FUNCTION_MAPPING_SUB_DIR=True
+
+; 簡翻中功能 預設 關
+; FUNCTION_TRANSLATION=True
+
+; 替換關鍵字 預設 關
+; FUNCTION_REPLACE=True
+; "{'需替換的字':'替換的字詞'}"
+REPLACE_DICT={"linux":"Linux"}
+
+; 替換副檔名 預設 關
+; FUNCTION_REPLACE_EXTENSION=True
+; "{'需替換的副檔名':'替換成副檔名'}"
+EXTENSION={"txt":"md"}
+
+; 加入前綴 預設 關
+; FUNCTION_USE_PREFIX=True
+; 前綴
+; PREFIX=Test
+
+; 消除空白 預設 關
+; FUNCTION_REMOVE_SPACE=True
+
+[IGNORE]
+; 忽略不處理 使用,隔開
+; 資料夾
+IGNORE_DIRS=[".git", "__pycache__"]
+; 檔名
+IGNORE_FILE=[".gitignore"]
+; 副檔名
+IGNORE_EXTE=["md", "yml", "cnf", "env", "docx"]
+
+[LOG]
+; ******log設定******
+; 關閉log功能 輸入選項 (true, True, 1) 預設 不關閉
+; LOG_DISABLE=1
+
+; logs路徑 預設 logs
+; LOG_PATH=
+
+; 關閉紀錄log檔案 輸入選項 (true, True, 1)  預設 不關閉
+; LOG_FILE_DISABLE=1
+
+; 設定紀錄log等級 DEBUG,INFO,WARNING,ERROR,CRITICAL 預設WARNING
+; LOG_LEVEL=
+
+; 指定log大小(輸入數字) 單位byte, 與 LOG_DAYS 只能輸入一項 若都輸入 LOG_SIZE優先
+; LOG_SIZE=
+
+; 指定保留log天數(輸入數字) 預設7
+; LOG_DAYS=
