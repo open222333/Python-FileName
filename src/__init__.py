@@ -145,19 +145,12 @@ try:
     # 設定紀錄log等級 預設WARNING, DEBUG,INFO,WARNING,ERROR,CRITICAL
     LOG_LEVEL = config.get('LOG', 'LOG_LEVEL', fallback='WARNING')
 
-    # 指定log大小(輸入數字) 單位byte
-    LOG_SIZE = config.getint('LOG', 'LOG_SIZE', fallback=0)
-    # 指定保留log天數(輸入數字) 預設7
-    LOG_DAYS = config.getint('LOG', 'LOG_DAYS', fallback=7)
-
     log_setting = {
         'HOSTNAME': HOSTNAME,
         'LOG_PATH': LOG_PATH,
         'LOG_DISABLE': LOG_DISABLE,
         'LOG_FILE_DISABLE': LOG_FILE_DISABLE,
-        'LOG_LEVEL': LOG_LEVEL,
-        'LOG_SIZE': LOG_SIZE,
-        'LOG_DAYS': LOG_DAYS
+        'LOG_LEVEL': LOG_LEVEL
     }
 except Exception as err:
     print_exc()
@@ -181,17 +174,6 @@ if not LOG_FILE_DISABLE:
     err_logger.set_date_handler()
 err_logger.set_msg_handler()
 
-# 目標資料夾
-TARGET_DIR = config.get('FILE', 'TARGET_DIR', fallback="target")
-
-try:
-    if not os.path.exists(TARGET_DIR):
-        os.makedirs(TARGET_DIR)
-except PermissionError as err:
-    err_logger.error(f'{err} 無權限建立資料夾', exc_info=True)
-
-# 是否為測試 預設 關
-IS_TEST = config.getboolean('FILE', 'IS_TEST', fallback=False)
 
 # 映射目標資料夾內的子資料夾 預設 關
 FUNCTION_MAPPING_SUB_DIR = config.getboolean('FILE', 'FUNCTION_MAPPING_SUB_DIR', fallback=False)
@@ -211,10 +193,16 @@ PREFIX = config.get('FILE', 'PREFIX', fallback=None)
 # 消除空白 功能
 FUNCTION_REMOVE_SPACE = config.getboolean('FILE', 'FUNCTION_REMOVE_SPACE', fallback=False)
 
-# 忽略
-IGNORE_DIRS = json.loads(config.get('IGNORE', 'IGNORE_DIRS', fallback="{}"))
-IGNORE_FILE = json.loads(config.get('IGNORE', 'IGNORE_FILE', fallback="{}"))
-IGNORE_EXTE = json.loads(config.get('IGNORE', 'IGNORE_EXTE', fallback="{}"))
+# 目標資料夾
+TARGET_DIR = config.get('SETTING', 'TARGET_DIR', fallback="target")
+
+# 是否為測試 預設 關
+IS_TEST = config.getboolean('SETTING', 'IS_TEST', fallback=False)
+
+# json檔路徑 預設 conf/word.json
+JSON_PATH = config.get('SETTING', 'JSON_PATH', fallback="conf/word.json")
+with open(JSON_PATH, 'r') as f:
+    INFO = json.loads(f.read())
 
 status = {
     '測試': IS_TEST,

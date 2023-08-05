@@ -1,0 +1,27 @@
+[
+  {
+    "execute": true,
+    "replace_word": {
+      "old_word1": "new_word1",
+      "old_word2": "new_word2"
+    },
+    "replace_extension": {
+      "old_extension1": "new_extension1",
+      "old_extension2": "new_extension2"
+    },
+    "exclude_dirs": [
+      ".git",
+      "__pycache__"
+    ],
+    "exclude_files": [
+      ".gitignore"
+    ],
+    "exclude_extensions": [
+      "md",
+      "yml",
+      "cnf",
+      "env",
+      "docx"
+    ]
+  }
+]
