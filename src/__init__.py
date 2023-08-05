@@ -129,7 +129,7 @@ class Log():
 
 
 config = ConfigParser(os.environ)
-config.read(f"config.ini")
+config.read(f"conf/config.ini")
 
 try:
     HOSTNAME = socket.gethostname()

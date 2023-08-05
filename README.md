@@ -2,7 +2,7 @@
 
 ## 使用方法
 
-config.ini 進行設定
+conf/config.ini 進行設定
 
 執行程式
 

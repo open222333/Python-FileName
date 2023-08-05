@@ -1,4 +1,4 @@
-from genral.function import (
+from src.function import (
     get_all_files,
     get_filename_after_replace_keyword,
     get_filename_after_translation_ch_tw,
@@ -7,7 +7,7 @@ from genral.function import (
     get_file_extension,
     remove_space
 )
-from genral import (
+from src import (
     TARGET_DIR,
     FUNCTION_TRANSLATION,
     FUNCTION_REPLACE,
