@@ -132,66 +132,29 @@ config = ConfigParser(os.environ)
 config.read(f"conf/config.ini")
 
 try:
-    HOSTNAME = socket.gethostname()
-
     LOG_PATH = config.get('LOG', 'LOG_PATH', fallback='logs')
-
     # 關閉log
     LOG_DISABLE = config.getboolean('LOG', 'LOG_DISABLE', fallback=False)
-
     # 關閉記錄檔案
     LOG_FILE_DISABLE = config.getboolean('LOG', 'LOG_FILE_DISABLE', fallback=False)
-
     # 設定紀錄log等級 預設WARNING, DEBUG,INFO,WARNING,ERROR,CRITICAL
     LOG_LEVEL = config.get('LOG', 'LOG_LEVEL', fallback='WARNING')
 
-    log_setting = {
-        'HOSTNAME': HOSTNAME,
-        'LOG_PATH': LOG_PATH,
-        'LOG_DISABLE': LOG_DISABLE,
-        'LOG_FILE_DISABLE': LOG_FILE_DISABLE,
-        'LOG_LEVEL': LOG_LEVEL
-    }
 except Exception as err:
     print_exc()
 
 # 建立log資料夾
-if not os.path.exists(LOG_PATH) and not LOG_DISABLE:
+if not os.path.exists(LOG_PATH):
     os.makedirs(LOG_PATH)
 
 if LOG_DISABLE:
     logging.disable()
 
-logger = Log(__name__)
+logger = Log()
+logger.set_level(LOG_LEVEL)
 if not LOG_FILE_DISABLE:
     logger.set_date_handler()
 logger.set_msg_handler()
-if LOG_LEVEL:
-    logger.set_level(LOG_LEVEL)
-
-err_logger = Log(f'{__name__}-error')
-if not LOG_FILE_DISABLE:
-    err_logger.set_date_handler()
-err_logger.set_msg_handler()
-
-
-# 映射目標資料夾內的子資料夾 預設 關
-FUNCTION_MAPPING_SUB_DIR = config.getboolean('FILE', 'FUNCTION_MAPPING_SUB_DIR', fallback=False)
-
-# 翻譯 功能
-FUNCTION_TRANSLATION = config.getboolean('FILE', 'FUNCTION_TRANSLATION', fallback=False)
-
-# 替換字詞 功能
-FUNCTION_REPLACE = config.getboolean('FILE', 'FUNCTION_REPLACE', fallback=False)
-REPLACE_DICT = json.loads(config.get('FILE', 'REPLACE_DICT', fallback="{}"))
-# 替換副檔名 功能
-FUNCTION_REPLACE_EXTENSION = config.getboolean('FILE', 'FUNCTION_REPLACE_EXTENSION', fallback=False)
-EXTENSION = json.loads(config.get('FILE', 'EXTENSION', fallback="{}"))
-# 加入前綴 功能
-FUNCTION_USE_PREFIX = config.getboolean('FILE', 'FUNCTION_USE_PREFIX', fallback=False)
-PREFIX = config.get('FILE', 'PREFIX', fallback=None)
-# 消除空白 功能
-FUNCTION_REMOVE_SPACE = config.getboolean('FILE', 'FUNCTION_REMOVE_SPACE', fallback=False)
 
 # 目標資料夾
 TARGET_DIR = config.get('SETTING', 'TARGET_DIR', fallback="target")
@@ -203,15 +166,3 @@ IS_TEST = config.getboolean('SETTING', 'IS_TEST', fallback=False)
 JSON_PATH = config.get('SETTING', 'JSON_PATH', fallback="conf/word.json")
 with open(JSON_PATH, 'r') as f:
     INFO = json.loads(f.read())
-
-status = {
-    '測試': IS_TEST,
-    '翻譯 功能': FUNCTION_TRANSLATION,
-    '替換字詞 功能': FUNCTION_REPLACE,
-    '替換副檔名 功能': FUNCTION_REPLACE_EXTENSION,
-    '加入前綴 功能': FUNCTION_USE_PREFIX,
-    '消除空白 功能': FUNCTION_REMOVE_SPACE
-}
-
-logger.debug(log_setting)
-logger.debug(status)

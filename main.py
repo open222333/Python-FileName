@@ -10,7 +10,7 @@ parser.add_argument('--to_tc', action='store_true', help='簡體轉繁體')
 parser.add_argument('--remove_space', action='store_true', help='移除檔名空白')
 parser.add_argument('--mapping_sub_dir', action='store_true', help='遍歷子資料夾')
 parser.add_argument('--replace_word',  action='store_true', help='替換字詞')
-parser.add_argument('--replace_extension', action='store_true', type=str, help='替換副檔名')
+parser.add_argument('--replace_extension', action='store_true', help='替換副檔名')
 parser.add_argument('--prefix', type=str, help='添加前綴')
 args = parser.parse_args()
 
